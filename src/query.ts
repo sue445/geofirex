@@ -29,13 +29,15 @@ export class GeoFireQuery<T = any> {
   private readonly ref: CollectionReference;
   constructor(
     private app: FirebaseApp,
-    private refString?: string
+    private refString?: string | CollectionReference
   ) {
     if (typeof refString === 'string') {
       const db = getFirestore(app);
       this.ref = collection(db, refString);
 
       // this.ref = this.app.firestore().collection(ref);
+    } else {
+      this.ref = refString;
     }
   }
   // GEO QUERIES
